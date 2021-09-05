@@ -13,8 +13,19 @@ router.route("/add").post(function(req, res) {
             res.json({ error: err });
             return console.log(err);
         } 
-        console.log("success");
+        console.log("create user success");
         res.json({ success: "user added" });
+    });
+  });
+
+  router.route("/").get(function(req, res) {
+    User.find({}, function(err, docs) {
+        if (err) {
+            res.json({ error: err });
+            return console.log(err);
+        } 
+        console.log("fetch users success");
+        res.json(docs);
     });
   });
 

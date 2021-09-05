@@ -10,8 +10,19 @@ router.route("/add").post(function(req, res) {
             res.json({ error: err });
             return console.log(err);
         } 
-        console.log("success");
+        console.log("create place success");
         res.json({ success: "place added" });
+    });
+  });
+
+  router.route("/").get(function(req, res) {
+    BucketList.find({}, function(err, docs) {
+        if (err) {
+            res.json({ error: err });
+            return console.log(err);
+        } 
+        console.log("fetch place success");
+        res.json(docs);
     });
   });
 
