@@ -12,14 +12,16 @@ import SignUpUser from "./components/signup-user.component.js";
 function App() {
   return (
     <Router>
-      <Navbar />
-      <br/>
-      <Route path="/view" component={ViewBucketList}/>
-      <Route path="/create" component={CreateBucketList}/>
-      <Route path="/edit" component={EditBucketList}/>
-      <Route path="/delete" component={DeleteBucketList}/>
-      <Route path="/signin" component={SignInUser}/>
-      <Route path="/signup" component={SignUpUser}/>
+      <div className="container">
+        <Navbar />
+        <br/>
+        <Route path="/view" component={ViewBucketList}/>
+        <Route path="/create" component={CreateBucketList}/>
+        <Route path="/edit" component={EditBucketList}/>
+        <Route path="/delete" component={DeleteBucketList}/>
+        <Route path="/signin" component={SignInUser}/>
+        <Route path="/signup" component={SignUpUser}/>
+      </div>
     </Router>
   );
 }
