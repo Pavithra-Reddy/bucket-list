@@ -1,24 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
+import Navbar from "./components/navbar.component.js";
+import ViewBucketList from "./components/view-bucket-list.component.js";
+import CreateBucketList from "./components/create-bucket-list.component.js";
+import EditBucketList from "./components/edit-bucket-list.component.js";
+import DeleteBucketList from "./components/delete-bucket-list.component.js";
+import SignInUser from "./components/signin-user.component.js";
+import SignUpUser from "./components/signup-user.component.js";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Navbar />
+      <br/>
+      <Route path="/view" component={ViewBucketList}/>
+      <Route path="/create" component={CreateBucketList}/>
+      <Route path="/edit" component={EditBucketList}/>
+      <Route path="/delete" component={DeleteBucketList}/>
+      <Route path="/signin" component={SignInUser}/>
+      <Route path="/signup" component={SignUpUser}/>
+    </Router>
   );
 }
 
