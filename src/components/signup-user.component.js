@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 export default class CreateBucketList extends Component {
     constructor(props) {
@@ -57,6 +58,11 @@ export default class CreateBucketList extends Component {
     onSignUp(e) {
         e.preventDefault();
 
+        if (this.state.password != this.state.confirmPassword) {
+            alert("Passwords don't match");
+            return;
+        }
+
         console.log("signup");
 
         const user = {
@@ -68,7 +74,17 @@ export default class CreateBucketList extends Component {
 
         console.log(user);
 
-        window.location = '/signin';
+        axios.post('http://localhost:5000/user/signup', user)
+            .then((res) => console.log(res.data));
+
+        this.setState({
+            userName: '',
+            password: '',
+            firstName: '',
+            lastName: '',
+            confirmPassword: ''
+        })
+        alert("success");
     }
 
     render() {
@@ -90,11 +106,11 @@ export default class CreateBucketList extends Component {
                     </div>
                     <div className="form-group">
                         <label>Password:</label>
-                        <input className="form-control" type="text" value={this.state.password} onChange={this.onTextChangePassword} required></input>
+                        <input className="form-control" type="password" value={this.state.password} onChange={this.onTextChangePassword} required></input>
                     </div>
                     <div className="form-group">
                         <label>Confirm Password:</label>
-                        <input className="form-control" type="text" value={this.state.confirmPassword} onChange={this.onTextChangeConfirmPassword} required></input>
+                        <input className="form-control" type="password" value={this.state.confirmPassword} onChange={this.onTextChangeConfirmPassword} required></input>
                     </div>
                     <div className="form-group">
                         <input className="btn btn-primary" type="submit" value="Sign Up" />
