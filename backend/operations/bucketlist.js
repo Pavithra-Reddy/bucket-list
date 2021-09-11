@@ -22,7 +22,9 @@ router.route("/add").post(function(req, res) {
   });
 
   router.route("/view").get(function(req, res) {
-    BucketList.find({}, function(err, docs) {
+    BucketList.find({
+        userId:req.body.userId
+    }, function(err, docs) {
         if (err) {
             res.json({ error: err });
             return console.log(err);
@@ -32,18 +34,7 @@ router.route("/add").post(function(req, res) {
     });
   });
 
-  router.route("/view").get(function(req, res) {
-    BucketList.find({}, function(err, docs) {
-        if (err) {
-            res.json({ error: err });
-            return console.log(err);
-        } 
-        console.log("fetch place success");
-        res.json(docs);
-    });
-  });
-
-  router.route("/delete").get(function(req, res) {
+  router.route("/delete").post(function(req, res) {
     BucketList.deleteOne({ _id: req.body.id }, function(err, docs) {
         if (err) {
             res.json({ error: err });
@@ -55,23 +46,21 @@ router.route("/add").post(function(req, res) {
   });
   
   router.route("/edit").post(function(req, res) {
-    const reqDoc = new BucketList({
+    const reqDoc = {
         action:req.body.action,
         country:req.body.country,
         imageUrl:req.body.imageUrl,
         fulfilledDate:req.body.fulfilledDate,
-        isComplete:req.body.isComplete,
-        userId:req.body.userId
-    });
-
+        isComplete:req.body.isComplete
+    };
     const options = { "upsert": false };
     BucketList.updateOne({ _id: req.body.id }, reqDoc, options,function(err) {
         if (err) {
             res.json({ error: err });
             return console.log(err);
         } 
-        console.log("create place success");
-        res.json({ success: "place added" });
+        console.log("update place success");
+        res.json({ success: "place updated" });
     })
   });
 
