@@ -11,6 +11,7 @@ export default class CreateBucketList extends Component {
         this.onTextChangePassword = this.onTextChangePassword.bind(this);
         this.onTextChangeConfirmPassword = this.onTextChangeConfirmPassword.bind(this);
         this.onSignUp = this.onSignUp.bind(this);
+        this.navigateToSignIn = this.navigateToSignIn.bind(this);
         
         this.state = {
             userName: '',
@@ -58,7 +59,7 @@ export default class CreateBucketList extends Component {
     onSignUp(e) {
         e.preventDefault();
 
-        if (this.state.password != this.state.confirmPassword) {
+        if (this.state.password !== this.state.confirmPassword) {
             alert("Passwords don't match");
             return;
         }
@@ -85,6 +86,10 @@ export default class CreateBucketList extends Component {
             confirmPassword: ''
         })
         alert("success");
+    }
+
+    navigateToSignIn(e) {
+        window.location = '/signin';
     }
 
     render() {
@@ -114,6 +119,9 @@ export default class CreateBucketList extends Component {
                     </div>
                     <div className="form-group">
                         <input className="btn btn-primary" type="submit" value="Sign Up" />
+                    </div>
+                    <div className="form-group">
+                        <input className="btn btn-primary" onClick={this.navigateToSignIn} value="Sign In" />
                     </div>
                 </form>
             </div>
