@@ -29,7 +29,7 @@ router.route("/signup").post(function(req, res) {
             res.json({ error: err });
             return console.log(err);
         } 
-        console.log("login success");
+        console.log(docs);
         res.json(docs);
     });
   });

@@ -2,7 +2,6 @@ import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import Navbar from "./components/navbar.component.js";
 import ViewBucketList from "./components/view-bucket-list.component.js";
 import CreateBucketList from "./components/create-bucket-list.component.js";
 import EditBucketList from "./components/edit-bucket-list.component.js";
@@ -13,8 +12,6 @@ function App() {
   return (
     <Router>
       <div className="container">
-        <Navbar />
-        <br/>
         <Route path="/view" component={ViewBucketList}/>
         <Route path="/create" component={CreateBucketList}/>
         <Route path="/edit" component={EditBucketList}/>

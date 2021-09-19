@@ -13,7 +13,8 @@ export default class CreateBucketList extends Component {
         
         this.state = {
             userName: '',
-            password: ''
+            password: '',
+            userId: ''
         }
     }
 
@@ -32,21 +33,30 @@ export default class CreateBucketList extends Component {
     onSignIn(e) {
         e.preventDefault();
 
-        const user = {
-            userName:this.state.userName,
-            password:this.state.password
-        }
+        (async () => {
+            const user = {
+                userName:this.state.userName,
+                password:this.state.password
+            }
 
-        console.log(user);
-
-        axios.post('http://localhost:5000/user/signin', user)
-            .then((res) => console.log(res.data));
-
+            const response = await axios.post('http://localhost:5000/user/signin', user);
+            this.setState({
+                userId: response.data[0]._id
+            })
+            this.props.history.push({ 
+                pathname: '/view',
+                state: {
+                    userId: response.data[0]._id,
+                    firstName: response.data[0].firstName
+                }
+            });
+        })();
+        
         this.setState({
             userName: '',
             password: ''
         })
-        alert("success");
+        
     }
 
     navigateToSignUp(e) {

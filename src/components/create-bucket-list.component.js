@@ -13,14 +13,17 @@ export default class CreateBucketList extends Component {
         this.onTextChangeFulfilledDate = this.onTextChangeFulfilledDate.bind(this);
         this.onTextChangeIsComplete = this.onTextChangeIsComplete.bind(this);
         this.onTextChangeUserId = this.onTextChangeUserId.bind(this);
-        
+        this.createBucketList = this.createBucketList.bind(this);
+        this.navigateToView = this.navigateToView.bind(this);
+
         this.state = {
             action:'',
             country:'',
             imageUrl:'',
-            fulfilledDate:new Date(),
+            fulfilledDate:'',
             isComplete:false,
-            userId:''
+            userId:this.props.location.state.userId,
+            firstName:this.props.location.state.firstName
         }
     }
 
@@ -86,7 +89,13 @@ export default class CreateBucketList extends Component {
     }
 
     navigateToView(e) {
-        window.location = '/view';
+        this.props.history.push({ 
+            pathname: '/view',
+            state: {
+                userId: this.state.userId,
+                firstName: this.state.firstName
+            }
+        });
     }
 
     render() {
@@ -104,11 +113,11 @@ export default class CreateBucketList extends Component {
                     </div>
                     <div className="form-group">
                         <label>ImageUrl:</label>
-                        <input className="form-control" type="text" value={this.state.imageUrl} onChange={this.onTextChangeImageUrl} required></input>
+                        <input className="form-control" type="text" value={this.state.imageUrl} onChange={this.onTextChangeImageUrl}></input>
                     </div>
                     <div className="form-group">
                         <label>Is Complete? : </label>
-                        <input className="form-check-input" type="checkbox" defaultChecked={this.state.isComplete} onChange={this.onTextChangeIsComplete} required></input>
+                        <input className="form-check-input" type="checkbox" defaultChecked={this.state.isComplete} onChange={this.onTextChangeIsComplete}></input>
                     </div>
                     <div className="form-group">
                         <label>Fulfilled Date:</label>
